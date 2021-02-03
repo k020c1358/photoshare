@@ -1,0 +1,51 @@
+{% extends "layout_login.html" %}
+{% block title %}
+{{user_name}}さんのホームページ
+{% endblock %}
+
+{% block contents %}
+<div class="box">
+<h2>{{user_name}}さんの基本情報：</h2>
+<!--{{albums}}-->
+<p>{% for i in user_msg %}
+ システムID:{{i.login_id}} <br>   
+ 個人名称:{{i.user_id}}     <br>
+ 友達欄(写真公開範囲):{{i.friend}}
+  {% endfor %}
+
+</p>
+</div>
+<div class="box">
+<h2>写真公開範囲変更：</h2>
+<p>PS:相手を友達に追加しても、相手の非公開写真を見ることができるわけではない</p>
+<p>でも相手があなたの非公開写真が見られる</p>
+<form action="/myhomepage/add" method="POST">
+  <label for="add_friend">友達追加(名前入力):</label>
+  <input type="text" name="add_friend">
+  <button type="submit" class="pure-button" onclick="/myhomepage/add">追加</button>
+  <br>
+  <br>
+</form>
+<form action="/myhomepage/delete" method="POST">
+  <label for="delete_friend">友達削除(名前入力):</label>
+  <input type="text" name="delete_friend">
+  <button type="submit" class="pure-button" onclick="/myhomepage/delete">削除</button>
+</form>
+</div>
+
+<div class="box">
+<h2>作品集：</h2>
+
+{% for i in albums  %}
+
+<a href="/myhomepage/albums/{{i.album_id}}" class="pure-button">floder：{{i.name}}</a>
+<span class="datetime">{{ i.created_at }}</span>
+<br>
+<br>
+
+{% endfor %}
+</div>
+<!-- ここにメインコンテンツ -->
+
+{% endblock %}
+

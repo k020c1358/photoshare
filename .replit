@@ -1,0 +1,5 @@
+run = "python flask_app.py"
+#run = "python setup_database.py"
+#run = "python test.py"
+
+language ="python3"
